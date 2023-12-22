@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,8 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
-Route::get('/home', [UserController::class, 'index'])->name('data.user');
+//user controller
 Route::get('/user', [UserController::class, 'home'])->name('data.user');
 Route::get('/jasa', [UserController::class, 'jasa'])->name('data.user');
+
+//admin controller
+Route::get('/admin', [AdminController::class, 'admin'])->name('data.admin');
