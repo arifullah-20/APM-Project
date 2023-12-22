@@ -24,3 +24,8 @@ Route::get('/jasa', [UserController::class, 'jasa'])->name('data.user');
 
 //admin controller
 Route::get('/admin', [AdminController::class, 'admin'])->name('data.admin');
+
+
+//layout setting
+Route::get('/navbar', [AdminController::class, 'navbar'])->name('data.admin');
+Route::get('/footer', [AdminController::class, 'footer'])->name('data.admin');
