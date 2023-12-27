@@ -7,6 +7,7 @@ use App\Http\Controllers\NavbarController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\FaqController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,17 +41,24 @@ Route::post('/simpan-logo', [NavbarController::class, 'simpan'])->name('data.sim
 Route::get('/footer', [FooterController::class, 'footer'])->name('data.footer');
       ///medsos
 Route::post('/simpan-medsos', [FooterController::class, 'simpan'])->name('data.simpan');
+Route::get('/hapus-medsos/{id}', [FooterController::class, 'hapusMedsos'])->name('hapus.medsos');
       ///quotes
 Route::post('/simpan-quotes', [FooterController::class, 'simpanQuotes'])->name('data.simpan');
      ///contalk
 Route::post('/simpan-kontak', [FooterController::class, 'simpanKontak'])->name('data.simpan');
+Route::get('/hapus-kontak/{id}', [FooterController::class, 'hapusKontak'])->name('hapus.kontak');
 
 
 //Content
-   //Slider
+      //Slider
 Route::get('/slider', [SliderController::class, 'index'])->name('data.slider');
 Route::post('/simpan-slider', [SliderController::class, 'simpan'])->name('data.simpan');
 
-    //Partner
+      //Partner
  Route::get('/partner', [PartnerController::class, 'index'])->name('data.partner');
  Route::post('/simpan-partner', [PartnerController::class, 'simpan'])->name('data.simpan');
+
+      //FAQ
+ Route::get('/faq', [FaqController::class, 'index'])->name('data.partner');
+ Route::post('/simpan-pertanyaan', [FaqController::class, 'simpan'])->name('data.simpan');
+

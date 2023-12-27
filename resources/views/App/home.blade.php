@@ -5,32 +5,32 @@
 
 <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
-        <br>
+        @foreach ($tb_slider as $index => $data)
+            <button type="button" data-bs-target="#header-carousel" data-bs-slide-to="{{ $index }}" @if($index === 0) class="active" @endif aria-label="Slide {{ $index + 1 }}"></button>
+        @endforeach
     </div>
+
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <div class="wave-background">
-                <img class="w-100" src="{{ asset('assets1/img/apmm.jpg')}}" alt="Image">
+        @foreach ($tb_slider as $index => $data)
+            <div class="carousel-item @if($index === 0) active @endif">
+                <div class="wave-background">
+                    <img class="w-100" src="{{ asset('images/slider/'.$data->gambar_slider) }}" alt="Image">
+                </div>
             </div>
-        </div>
-        <!-- ... (carousel items) ... -->
+        @endforeach
     </div>
+
     <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
     </button>
+
     <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
 </div>
-</div>
+
 
 
 
@@ -93,22 +93,27 @@
 <!-- Contact End -->
 {{-- content home end --}}
 <!-- Vendor Start -->
+<style>
+
+        .vendor-carousel img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: auto;
+        max-height: 50px; /* You can adjust the max height as needed */
+    }
+</style>
 <div class="container-fluid py-4 wow fadeInUp" data-wow-delay="0.1s">
     <div class="container py-2 mb-2">
         <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;">
             {{-- <h5 class="fw-bold  text-uppercase" style="color:#E0202D;">Cek Resi</h5> --}}
             <h2 class="mb-0">Media Partner</h2>
         </div>
-        <div class="bg-white">
+        <div class="vendorz">
             <div class="owl-carousel vendor-carousel">
-                <img src="{{ asset('assets1/img/vendor-1.jpg')}}" alt="">
-                <img src="{{ asset('assets1/img/vendor-2.jpg')}}" alt="">
-                <img src="{{ asset('assets1/img/vendor-3.jpg')}}" alt="">
-                <img src="{{ asset('assets1/img/vendor-4.jpg')}}" alt="">
-                <img src="{{ asset('assets1/img/vendor-5.jpg')}}" alt="">
-                <img src="{{ asset('assets1/img/vendor-6.jpg')}}" alt="">
-                <img src="{{ asset('assets1/img/vendor-7.jpg')}}" alt="">
-                <img src="{{ asset('assets1/img/vendor-7.jpg')}}" alt="">
+                @foreach ($tb_partner as $data)
+                <img src="{{ asset('images/partner/'.$data->logo_partner) }}" alt=""  class="img-fluid">
+                @endforeach
 
             </div>
         </div>
@@ -564,70 +569,9 @@
 </div>
 
 
-{{-- FAQ end --}}
-<!-- Why APM -->
-{{-- <div class="why-choose-section">
-    <div class="container">
-        <div class="row justify-content-between">
-            <div class="col-lg-6">
-                <h2 class="section-title">Why Choose Us</h2>
-                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
 
-                <div class="row my-5">
-                    <div class="col-6 col-md-6">
-                        <div class="feature">
-                            <div class="icon">
-                                <img src="images/truck.svg" alt="Image" class="imf-fluid">
-                            </div>
-                            <h3>Fast &amp; Free Shipping</h3>
-                            <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
-                        </div>
-                    </div>
 
-                    <div class="col-6 col-md-6">
-                        <div class="feature">
-                            <div class="icon">
-                                <img src="images/bag.svg" alt="Image" class="imf-fluid">
-                            </div>
-                            <h3>Easy to Shop</h3>
-                            <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-md-6">
-                        <div class="feature">
-                            <div class="icon">
-                                <img src="images/support.svg" alt="Image" class="imf-fluid">
-                            </div>
-                            <h3>24/7 Support</h3>
-                            <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-md-6">
-                        <div class="feature">
-                            <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
-                                <i class="fa fa-cubes text-white"></i>
-                            </div>
-                            <h3>Hassle Free Returns</h3>
-                            <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="col-lg-5">
-                <div class="img-wrap">
-                    <img class="w-100" src="{{ asset('assets1/img/manfaat.jpg')}}" alt="Image">
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div> --}}
-
-<div class="container-fluid py-5">
+<div class="container-fluid py-3">
     <div class="container py-5">
         <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px;" data-aos="fade-up">
             <h5 class="fw-bold text-primary text-uppercase">Why Choose Us</h5>

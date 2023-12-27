@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function admin(){
-        $data ['navbarset']= DB::table('navbarset')->get();
 
-        return view('admin.layout',$data);
+
+        return view('admin.layout');
     }
      public function navbar(){
         return view('admin.App.setnav');

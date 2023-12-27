@@ -80,7 +80,10 @@
 <div class="container-fluid position-relative p-0">
     <nav id="myNavbar" class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
         <a href="index.html" class="navbar-brand p-0">
-            <img src="{{ asset('assets1/img/logo.png') }}" alt="Your Logo" class="logo-img me-2">
+
+            @foreach ($navbarset as $data)
+            <img src="{{ asset('images/logo/'.$data->logo) }}" alt="Your Logo" class="logo-img me-2">
+            @endforeach
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="fa fa-bars"></span>

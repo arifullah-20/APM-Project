@@ -108,7 +108,7 @@
                     </a>
                 </li>
                 <li class="menu-item" onclick="handleSubMenuItemClick(this)">
-                    <a href="/media-sosial" class="menu-link">
+                    <a href="/faq" class="menu-link">
                         <div data-i18n="Without menu">FAQ</div>
                     </a>
                 </li>

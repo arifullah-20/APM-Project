@@ -35,6 +35,15 @@ class FooterController extends Controller
         return redirect()->route('data.footer')->with('success', 'berhasil disimpan.');
     }
 
+    public function hapusMedsos($id)
+    {
+        // Hapus data dari tabel berdasarkan id_link
+        DB::table('tb_linkmedsos')->where('id_link', $id)->delete();
+
+        // Redirect ke halaman sebelumnya dengan pesan sukses
+        return back()->with('success', 'Medsos berhasil dihapus');
+    }
+
     public function simpanKontak(Request $request)
     {
         // Simpan data ke dalam tabel tb_kontakvalue
@@ -45,6 +54,15 @@ class FooterController extends Controller
 
         return redirect()->route('data.footer')->with('success', 'berhasil disimpan.');
     }
+    public function hapusKontak($id)
+    {
+        // Hapus data dari tabel berdasarkan id_link
+        DB::table('tb_kontakvalue')->where('id_kontakvalue', $id)->delete();
+
+        // Redirect ke halaman sebelumnya dengan pesan sukses
+        return back()->with('success', 'Kontak berhasil dihapus');
+    }
+
 
 
     public function simpanQuotes(Request $request)
