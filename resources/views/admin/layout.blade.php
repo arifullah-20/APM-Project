@@ -33,7 +33,7 @@
 
         <link rel="stylesheet" href="{{('assets/vendor/fonts/boxicons.css')}}" />
 
-
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
         <!-- Core CSS -->
         <link rel="stylesheet" href="{{('assets/vendor/css/core.css')}}" class="template-customizer-core-css" />
         <link rel="stylesheet" href="{{('assets/vendor/css/theme-default.css')}}" class="template-customizer-theme-css" />
@@ -115,7 +115,8 @@
     <!-- endbuild -->
     <!-- Vendors JS -->
     <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{ asset('assets/js/main.js')}}"></script>
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
     <!-- Page JS -->
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

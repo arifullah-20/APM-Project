@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\NavbarController;
+use App\Http\Controllers\FooterController;
+use App\Http\Controllers\SliderController;
+use App\Http\Controllers\PartnerController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,5 +32,25 @@ Route::get('/admin', [AdminController::class, 'admin'])->name('data.admin');
 
 
 //layout setting
-Route::get('/navbar', [AdminController::class, 'navbar'])->name('data.admin');
-Route::get('/footer', [AdminController::class, 'footer'])->name('data.admin');
+  // Navbar Controller
+Route::get('/navbar', [NavbarController::class, 'index'])->name('data.navbar');
+Route::post('/simpan-logo', [NavbarController::class, 'simpan'])->name('data.simpan');
+
+  // Footer Controller
+Route::get('/footer', [FooterController::class, 'footer'])->name('data.footer');
+      ///medsos
+Route::post('/simpan-medsos', [FooterController::class, 'simpan'])->name('data.simpan');
+      ///quotes
+Route::post('/simpan-quotes', [FooterController::class, 'simpanQuotes'])->name('data.simpan');
+     ///contalk
+Route::post('/simpan-kontak', [FooterController::class, 'simpanKontak'])->name('data.simpan');
+
+
+//Content
+   //Slider
+Route::get('/slider', [SliderController::class, 'index'])->name('data.slider');
+Route::post('/simpan-slider', [SliderController::class, 'simpan'])->name('data.simpan');
+
+    //Partner
+ Route::get('/partner', [PartnerController::class, 'index'])->name('data.partner');
+ Route::post('/simpan-partner', [PartnerController::class, 'simpan'])->name('data.simpan');
