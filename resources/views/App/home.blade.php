@@ -603,10 +603,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                    <div class="col-12">
-                        <img class="w-100" src="{{ asset('assets1/img/serius.jpg')}}" alt="Image">
-                    </div>
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="col-12">
+                    <img class="w-100" src="{{ asset('assets1/img/serius.jpg')}}" alt="Image">
                 </div>
             </div>
         </div>
