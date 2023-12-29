@@ -34,7 +34,8 @@
                                     <div class="row">
                                         <div class="col mb-3">
                                             <label for="SliderFile" class="form-label">Choose Logo</label>
-                                            <input type="file" id="SliderFile" name="gambar_slider" class="form-control" accept="image/*">
+                                            <input type="file" id="SliderFile" name="gambar_slider" class="form-control"
+                                                accept="image/*">
                                         </div>
                                     </div>
                             </div>
@@ -62,11 +63,12 @@
                 @foreach ($tb_slider as $data)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td><img src="{{ asset('images/slider/'.$data->gambar_slider) }} "  width="100px" alt=""></td>
+                    <td><img src="{{ asset('images/slider/'.$data->gambar_slider) }}" width="100px" alt=""></td>
                     <td>
-                        <a href="" class="btn btn-success">Lihat</a>
-                        <a href="" class="btn btn-success">Ubah</a>
-                        <a href="" class="btn btn-danger">Hapus</a>
+                        <a href="/slider-ubah{{$data->id_slider}}" class="btn btn-success">Ubah</a>
+                        <a href="{{ route('hapus.slider', ['id' => $data->id_slider]) }}"
+                            class="btn btn-danger">Hapus</a>
+                    <a href="/tes-ubah" class="btn btn-success">Ubah Test</a>
                     </td>
                 </tr>
                 @endforeach
@@ -74,4 +76,5 @@
         </table>
     </div>
 </div>
+
 @endsection

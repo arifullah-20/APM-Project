@@ -64,9 +64,9 @@
                     <td>{{ $loop->iteration }}</td>
                     <td><img src="{{ asset('images/partner/'.$data->logo_partner) }} "  width="100px" alt=""></td>
                     <td>
-                        <a href="" class="btn btn-success">Lihat</a>
-                        <a href="" class="btn btn-success">Ubah</a>
-                        <a href="" class="btn btn-danger">Hapus</a>
+                        <a href="{{ route('partner.ubah', ['id' => $data->id_partner]) }}" class="btn btn-success">Ubah</a>
+
+                        <a href="{{ route('hapus.partner', ['id' => $data->id_partner]) }}" class="btn btn-danger">Hapus</a>
                     </td>
                 </tr>
                 @endforeach

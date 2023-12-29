@@ -25,4 +25,21 @@ class PartnerController extends Controller
          ]);
          return redirect()->route('data.partner')->with('success', 'berhasil disimpan.');
         }
+
+        public function hapusPartner($id)
+        {
+            // Hapus data dari tabel berdasarkan id_link
+            DB::table('tb_partner')->where('id_partner', $id)->delete();
+
+            // Redirect ke halaman sebelumnya dengan pesan sukses
+            return back()->with('success', 'Kontak berhasil dihapus');
+        }
+        public function ubah($id)
+        {
+
+            return view('admin.App.content.partnerubah',[
+                'tb_partner'=>DB::table('tb_partner')->where('id_partner',$id)->first(),
+
+            ]);
+        }
 }

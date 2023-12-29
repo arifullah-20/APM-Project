@@ -53,12 +53,15 @@ Route::get('/hapus-kontak/{id}', [FooterController::class, 'hapusKontak'])->name
       //Slider
 Route::get('/slider', [SliderController::class, 'index'])->name('data.slider');
 Route::post('/simpan-slider', [SliderController::class, 'simpan'])->name('data.simpan');
-
+Route::get('/hapus-slider/{id}', [SliderController::class, 'hapusSlider'])->name('hapus.slider');
+Route::get('/slider-ubah{id}', [SliderController::class, 'ubah'])->name('slider.ubah');
+Route::get('/tes-ubah', [SliderController::class, 'ubahTes'])->name('slider.ubahTest');
       //Partner
  Route::get('/partner', [PartnerController::class, 'index'])->name('data.partner');
  Route::post('/simpan-partner', [PartnerController::class, 'simpan'])->name('data.simpan');
-
+ Route::get('/hapus-partner/{id}', [PartnerController::class, 'hapusPartner'])->name('hapus.partner');
+ Route::get('/ubah-partner/{id}', [PartnerController::class, 'ubah'])->name('partner.ubah');
       //FAQ
- Route::get('/faq', [FaqController::class, 'index'])->name('data.partner');
- Route::post('/simpan-pertanyaan', [FaqController::class, 'simpan'])->name('data.simpan');
-
+ Route::get('/faq', [FaqController::class, 'index'])->name('data.faq');
+ Route::post('/simpan-faq', [FaqController::class, 'simpanPertanyaan'])->name('data.simpanPertanyaan');
+ Route::post('/simpan-jawaban', [FaqController::class, 'simpanJawaban'])->name('simpan.jawaban');
