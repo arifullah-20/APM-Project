@@ -98,29 +98,6 @@
                 </tr>
                 @endforeach
             </tbody>
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    var editButtons = document.querySelectorAll('.btn-primary');
-
-                    editButtons.forEach(function (button) {
-                        button.addEventListener('click', function () {
-                            var id = button.getAttribute('data-id');
-                            var modal = document.getElementById('basicModalEdit' + id);
-                            var form = document.getElementById('editLogoForm');
-
-                            // Set the form action dynamically based on the ID
-                            form.action = '/edit-partner/' + id;
-
-                            // Clear the file input to prevent displaying the previous selected file
-                            document.getElementById('logo_partner').value = '';
-
-                            // Show the modal
-                            var modalInstance = new bootstrap.Modal(modal);
-                            modalInstance.show();
-                        });
-                    });
-                });
-            </script>
         </table>
     </div>
 </div>

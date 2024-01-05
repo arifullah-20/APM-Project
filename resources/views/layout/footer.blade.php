@@ -124,6 +124,7 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('assets1/js/main.js')}}"></script>
+    <script src="{{ asset('assets1/js/custom.js')}}"></script>
 </body>
 
 </html>

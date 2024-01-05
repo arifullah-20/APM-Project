@@ -117,42 +117,7 @@
                 </div>
 
                 <script>
-                    // Fungsi untuk menetapkan nilai pertanyaan dan ID ke dalam modal saat tombol "Jawab" diklik
-                    document.addEventListener('DOMContentLoaded', function () {
-                        var jawabLinks = document.querySelectorAll('.jawab-link');
 
-                        jawabLinks.forEach(function (link) {
-                            link.addEventListener('click', function (event) {
-                                var idPertanyaan = link.getAttribute('data-id');
-                                var pertanyaanText = link.getAttribute('data-pertanyaan');
-
-                                // Setel nilai di dalam modal
-                                document.getElementById('idPertanyaan').value = idPertanyaan;
-
-                                // Perbarui konten teks elemen <p>
-                                document.getElementById('questionText').innerText = pertanyaanText;
-
-                                // Tampilkan modal
-                                $('#jawabModal').modal('show');
-                            });
-                        });
-                    });
-
-                    // Fungsi untuk menyimpan jawaban (Anda dapat menyesuaikannya sesuai kebutuhan)
-                    function saveChanges() {
-                        // Ambil ID pertanyaan dari modal
-                        var idPertanyaan = document.getElementById('idPertanyaan').value;
-
-                        // Ambil jawaban dari modal (Anda mungkin ingin memvalidasi atau membersihkannya)
-                        var jawaban = document.getElementById('jawaban').value;
-
-                        // Di sini, Anda dapat menambahkan logika penyimpanan atau mengirim data ke server
-                        // Contohnya, bisa menggunakan AJAX atau pengiriman formulir
-                        console.log('Simpan jawaban:', jawaban);
-
-                        // Tutup modal
-                        $('#jawabModal').modal('hide');
-                    }
                 </script>
 
 </div>
@@ -194,33 +159,5 @@
                     </div>
                 </div>
 
-                <!-- Script untuk fungsi hapusData -->
-                <script>
-                    function hapusData(index) {
-                        // Implementasi logika penghapusan data di sini
-                        // Anda dapat menggunakan JavaScript atau Ajax untuk mengirim permintaan penghapusan ke server
-                        console.log('Menghapus data dengan index:', index);
-                    }
-                </script>
-                <script>
-                    // Fungsi untuk menetapkan nilai pertanyaan dan ID ke dalam modal saat tombol "Jawab" diklik
-                    document.addEventListener('DOMContentLoaded', function () {
-                        var jawabLinks = document.querySelectorAll('.jawab-link');
 
-                        jawabLinks.forEach(function (link) {
-                            link.addEventListener('click', function (event) {
-                                var idPertanyaan = link.getAttribute('data-id');
-                                var pertanyaanText = link.getAttribute('data-pertanyaan');
-                                document.getElementById('idPertanyaan').value = idPertanyaan;
-                                document.getElementById('questionContainer').innerText = pertanyaanText;
-                            });
-                        });
-                    });
-
-                    // Fungsi untuk menyimpan jawaban (Anda dapat menyesuaikannya sesuai kebutuhan)
-                    function saveChanges() {
-                        // Lakukan logika penyimpanan jawaban di sini, bisa menggunakan AJAX atau form submit.
-                        document.getElementById('simpanJawaban').submit();
-                    }
-                </script>
                 @endsection

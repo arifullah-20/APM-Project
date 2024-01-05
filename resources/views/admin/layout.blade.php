@@ -38,6 +38,7 @@
         <link rel="stylesheet" href="{{('assets/vendor/css/core.css')}}" class="template-customizer-core-css" />
         <link rel="stylesheet" href="{{('assets/vendor/css/theme-default.css')}}" class="template-customizer-theme-css" />
         <link rel="stylesheet" href="{{('assets/css/demo.css')}}" />
+        <link rel="stylesheet" href="{{('assets/css/custom.css')}}" />
 
         <!-- Vendors CSS -->
         <link rel="stylesheet" href="{{('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
@@ -116,6 +117,7 @@
     <!-- Vendors JS -->
     <!-- Main JS -->
     <script src="{{ asset('assets/js/main.js')}}"></script>
+    <script src="{{ asset('assets/js/faq.js')}}"></script>
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
     <!-- Page JS -->
     <!-- Place this tag in your head or just before your close body tag. -->

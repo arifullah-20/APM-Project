@@ -1,0 +1,32 @@
+
+    .navbar {
+        background-color: #fff;
+        overflow: hidden;
+        padding: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar img {
+        float: left;
+        height: 50px;
+        /* Sesuaikan ukuran logo */
+        margin-right: 20px;
+    }
+
+    .logo-edit-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: auto;
+    }
+
+    .logo-edit-button:hover {
+        background-color: #2980b9;
+    }
+

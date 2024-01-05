@@ -122,44 +122,6 @@
 
 
 
-        <script>
-            // Fungsi untuk menangani klik pada menu-item
-            function handleMenuItemClick(menuItem) {
-                // Menghapus kelas "active" dari semua elemen dengan kelas "menu-item"
-                document.querySelectorAll('.menu-item').forEach(function (item) {
-                    item.classList.remove('active');
-                });
-
-                // Menambahkan kelas "active" pada elemen menu-item yang diklik
-                menuItem.classList.add('active');
-            }
-
-            // Fungsi untuk menangani klik pada menu-sub
-            function handleSubMenuItemClick(subMenuItem) {
-                // Menghapus kelas "active" dari semua elemen dengan kelas "menu-item" di dalam menu-sub
-                subMenuItem.closest('.menu-sub').querySelectorAll('.menu-item').forEach(function (item) {
-                    item.classList.remove('active');
-                });
-
-                // Menambahkan kelas "active" pada elemen menu-item yang diklik di dalam menu-sub
-                subMenuItem.classList.add('active');
-            }
-
-            // Memeriksa URL dan menetapkan "active" pada menu yang sesuai
-            function setActiveMenu() {
-                var currentPath = window.location.pathname;
-                var menuLinks = document.querySelectorAll('.menu-link');
-
-                menuLinks.forEach(function (link) {
-                    if (link.getAttribute('href') === currentPath) {
-                        link.closest('.menu-item').classList.add('active');
-                    }
-                });
-            }
-            // Panggil setActiveMenu saat halaman dimuat
-            window.onload = setActiveMenu;
-
-        </script>
 
 
 
