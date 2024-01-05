@@ -103,7 +103,6 @@
                                 <form id="simpanJawaban" action="/simpan-jawaban" method="post" enctype="multipart/form-data" id="SimpaJawaban">
                                     @csrf
                                     <p id="questionText"></p>
-                                    <input type="hidden" name="idPertanyaan" id="idPertanyaan" value="">
                                     <div class="mb-3">
                                         <label for="jawaban" class="form-label">Jawaban:</label>
                                         <textarea class="form-control" id="jawaban" name="jawaban" rows="3" required></textarea>
