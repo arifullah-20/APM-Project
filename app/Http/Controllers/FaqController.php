@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 class FaqController extends Controller
 {
     public function index(){
+        $data ['tb_faq']= DB::table('tb_faq')
+        ->join('tb_pertanyaan','tb_faq.id_pertanyaan','=','tb_pertanyaan.id_pertanyaan')
+        ->get();
+
         $data ['tb_pertanyaan']= DB::table('tb_pertanyaan')->get();
         return view ('admin.App.content.faq', $data);
        }
@@ -28,14 +32,17 @@ class FaqController extends Controller
 
        }
 
-       public function simpanJawaban(Request $request){
-         DB::table('tb_faq')->insert([
-            'id_pertanyaan' => $request->id_pertanyaan,
-            'jawaban' => $jawaban
+       public function simpanJawaban(Request $request)
+       {
+           DB::table('tb_faq')->insert([
+               'id_pertanyaan' => $request->id_pertanyaan,
+               'jawaban' => $request->jawaban
+           ]);
 
-         ]);
-         return redirect()->route('data.faq')->with('success', 'berhasil disimpan.');
-        }
+           return redirect()->route('data.faq')->with('success', 'Berhasil disimpan.');
+       }
+
+
 
 
 }

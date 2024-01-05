@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\slider;
 
 
 class SliderController extends Controller
@@ -59,34 +60,56 @@ class SliderController extends Controller
     {
         return view('admin.App.content.sliderubah');
     }
-
     public function update(Request $request, $id)
     {
-        // Validasi request sesuai kebutuhan
-        $request->validate([
-            'gambar_slider' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Sesuaikan dengan jenis gambar yang diizinkan
+        // Validasi request jika diperlukan
+
+
+        $namafile =null ;
+        if($request->gambar_slider){
+            $namafile =$request->gambar_slider->getClientOriginalName();
+            $request->file('gambar_slider')->move('images/slider/',$request->gambar_slider->getgetClientOriginalName());
+        }
+        $data = DB::table('tb_slider')->insert([
+            'gambar_slider'=>$namafile
         ]);
 
-        // Cek apakah data slider dengan ID tersebut ada
+    }
+
+
+    public function edit(Request $request, $id)
+    {
+        // Validasi form jika diperlukan
+        $request->validate([
+            'gambar_slider' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Sesuaikan dengan kebutuhan Anda
+        ]);
+
+        // Cari data slider berdasarkan ID menggunakan Eloquent
         $slider = Slider::find($id);
 
         if (!$slider) {
-            return redirect()->back()->with('error', 'Slider not found');
+            // Handle jika ID tidak ditemukan
+            return redirect()->route('data.slider')->with('error', 'Slider tidak ditemukan.');
         }
 
-        // Proses perubahan data
+        // Jika file gambar diunggah
         if ($request->hasFile('gambar_slider')) {
-            // Jika ada file gambar yang diunggah, simpan gambar baru
-            $gambarSlider = $request->file('gambar_slider');
-            $gambarPath = $gambarSlider->storeAs('images/slider', 'gambar_' . $id . '.' . $gambarSlider->getClientOriginalExtension(), 'public');
+            // Simpan gambar baru
+            $namafile = $request->gambar_slider->getClientOriginalName();
+            $request->gambar_slider->move(public_path('images/slider/'), $namafile);
 
-            // Update path gambar di database
-            $slider->gambar_slider = $gambarPath;
+            if ($slider->gambar) {
+                Storage::delete($slider->gambar);
+            }
+
+            // Update data ke dalam tabel tb_slider sesuai ID
+            $slider->update(['gambar_slider' => $namafile]);
         }
-        $slider->save();
 
-        return redirect()->back()->with('success', 'Slider updated successfully');
+        return redirect()->route('data.slider')->with('success', 'Slider berhasil diperbarui.');
     }
+
+
 
 }
 

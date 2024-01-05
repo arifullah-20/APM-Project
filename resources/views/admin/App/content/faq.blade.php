@@ -8,7 +8,6 @@
 
         <h4 class="py-3 mb-4"><span class="text-muted fw-light">Content /</span> FAQ</h4>
 
-
         <div class="card">
             <div class="card-body">
                 <div class="row mb-3">
@@ -32,8 +31,12 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
+
                             <div class="modal-body">
-                                    <div class="mb-3">
+                                <form method="POST" action="/simpan-faq" enctype="multipart/form-data"
+                                id="editLogoFormP">
+                                @csrf
+                                <div class="mb-3">
                                         <label for="pertanyaan" class="form-label">Pertanyaan</label>
                                         <textarea class="form-control" name="pertanyaan" id="pertanyaan"
                                             rows="3"></textarea>
@@ -48,6 +51,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+
 
                 <table class="table table-stripe">
                     <thead>
@@ -85,210 +91,136 @@
                     </tbody>
                 </table>
 
-                <style>
-                    .modal.show
-                    .modal-dialog
-                    {
-                    background-color:
-                    transparent;
-                    }
-                    .modal-backdrop.show
-                    {
-                    background-color:
-                    transparent;
-                    }
-
-                    #jawabModal
-                    {
-                    background-color:
-                    transparent;
-                    }
-
-                </style>
-
-                <div class="modal fade" id="jawabModal" tabindex="-1" aria-labelledby="jawabModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
+                <!-- Add this modal code after your existing code -->
+                <div class="modal fade" id="jawabModal" tabindex="-1" role="dialog" aria-labelledby="jawabModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel3">Jawab Pertanyaan</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                <h5 class="modal-title" id="jawabModalLabel">Jawab Pertanyaan</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <!-- Display the question here -->
-                                <div id="questionContainer"></div>
-
-                                <form method="POST" action="{{ route('simpan.jawaban') }}"
-                                    enctype="multipart/form-data" id="editLogoForm">
+                                <form id="simpanJawaban" action="/simpan-jawaban" method="post" enctype="multipart/form-data" id="SimpaJawaban">
                                     @csrf
-                                    <input type="hidden" id="idPertanyaan" name="id_pertanyaan">
+                                    <p id="questionText"></p>
+                                    <input type="hidden" name="idPertanyaan" id="idPertanyaan" value="">
                                     <div class="mb-3">
-                                        <label for="jawaban" class="form-label">Jawaban Anda:</label>
-                                        <textarea class="form-control" id="jawaban" name="jawaban" rows="3"></textarea>
+                                        <label for="jawaban" class="form-label">Jawaban:</label>
+                                        <textarea class="form-control" id="jawaban" name="jawaban" rows="3" required></textarea>
                                     </div>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                    <button type="button" class="btn btn-primary" onclick="saveChanges()">Simpan</button>
                                 </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary"
-                                    data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" onclick="saveChanges()">Save
-                                    changes</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <script>
+                    // Fungsi untuk menetapkan nilai pertanyaan dan ID ke dalam modal saat tombol "Jawab" diklik
                     document.addEventListener('DOMContentLoaded', function () {
-                        var jawabModal = new bootstrap.Modal(document.getElementById('jawabModal'));
-
-                        jawabModal._element.addEventListener('hidden.bs.modal', function () {
-                            // Membersihkan modal setelah tertutup
-                            document.getElementById('questionContainer').innerHTML = '';
-
-                            // Menangani dropdown setelah modal tertutup
-                            var dropdowns = document.querySelectorAll('.dropdown');
-                            dropdowns.forEach(function (dropdown) {
-                                var instance = new bootstrap.Dropdown(dropdown);
-                                instance.update(); // Menyegarkan dropdown
-                            });
-                        });
-
                         var jawabLinks = document.querySelectorAll('.jawab-link');
 
                         jawabLinks.forEach(function (link) {
                             link.addEventListener('click', function (event) {
-                                event.preventDefault();
-
                                 var idPertanyaan = link.getAttribute('data-id');
                                 var pertanyaanText = link.getAttribute('data-pertanyaan');
 
-                                // Set the question content inside the #questionContainer
-                                document.getElementById('questionContainer').innerHTML =
-                                    '<strong>Pertanyaan:</strong> ' + pertanyaanText;
-
-                                // Set the id_pertanyaan in the hidden input field
+                                // Setel nilai di dalam modal
                                 document.getElementById('idPertanyaan').value = idPertanyaan;
 
-                                jawabModal.show();
+                                // Perbarui konten teks elemen <p>
+                                document.getElementById('questionText').innerText = pertanyaanText;
+
+                                // Tampilkan modal
+                                $('#jawabModal').modal('show');
                             });
                         });
                     });
 
+                    // Fungsi untuk menyimpan jawaban (Anda dapat menyesuaikannya sesuai kebutuhan)
                     function saveChanges() {
+                        // Ambil ID pertanyaan dari modal
                         var idPertanyaan = document.getElementById('idPertanyaan').value;
+
+                        // Ambil jawaban dari modal (Anda mungkin ingin memvalidasi atau membersihkannya)
                         var jawaban = document.getElementById('jawaban').value;
 
-                        // Kirim data ke server menggunakan AJAX
-                        fetch('{{ route('simpan.jawaban') }}', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                            },
-                            body: JSON.stringify({
-                                id_pertanyaan: idPertanyaan,
-                                jawaban: jawaban
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            // Tanggapan dari server (bisa ditangani sesuai kebutuhan)
-                            console.log(data.message);
+                        // Di sini, Anda dapat menambahkan logika penyimpanan atau mengirim data ke server
+                        // Contohnya, bisa menggunakan AJAX atau pengiriman formulir
+                        console.log('Simpan jawaban:', jawaban);
 
-                            // Tutup modal setelah menyimpan perubahan
-                            var jawabModal = new bootstrap.Modal(document.getElementById('jawabModal'));
-                            jawabModal.hide();
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
+                        // Tutup modal
+                        $('#jawabModal').modal('hide');
                     }
                 </script>
-            </div>
-        </div>
+
+</div>
 
 
+                <div class="container-fluid">
+                    <h5 class="mt-4">Accordion</h5>
+                    <div class="row">
+                        <div class="col-md mb-4 mb-md-2">
+                            <div class="accordion-container">
+                                @foreach ($tb_faq as $index => $data)
+                                <div class="accordion-item mb-3">
 
+                                    <div class="card accordion-item active">
+                                        <div class="card-header">
+                                            <button type="button" class="btn btn-danger btn-sm ms-2"
+                                    onclick="hapusData({{$index}})">Hapus</button>
+                                            <h2 class="accordion-header" id="heading{{$index}}">
+                                                <button type="button" class="accordion-button" data-bs-toggle="collapse"
+                                                    data-bs-target="#accordion{{$index}}" aria-expanded="true"
+                                                    aria-controls="accordion{{$index}}">
+                                                    {{$data->pertanyaan}}
+                                                </button>
+                                            </h2>
 
+                                        </div>
 
-                <br>
-
-                <h5 class="mt-4">Accordion</h5>
-                <div class="row">
-                    <div class="col-md mb-4 mb-md-2">
-                        <small class="text-light fw-medium">Basic Accordion</small>
-                        <div class="accordion mt-3" id="accordionExample">
-                            <div class="card accordion-item active">
-                                <h2 class="accordion-header" id="headingOne">
-                                    <button type="button" class="accordion-button" data-bs-toggle="collapse"
-                                        data-bs-target="#accordionOne" aria-expanded="true"
-                                        aria-controls="accordionOne">
-                                        Accordion Item 1
-                                    </button>
-                                </h2>
-
-                                <div id="accordionOne" class="accordion-collapse collapse show"
-                                    data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        Lemon drops chocolate cake gummies carrot cake chupa chups muffin topping.
-                                        Sesame snaps
-                                        icing marzipan gummi
-                                        bears macaroon dragée danish caramels powder. Bear claw dragée pastry topping
-                                        soufflé.
-                                        Wafer gummi bears
-                                        marshmallow pastry pie.
+                                        <div id="accordion{{$index}}" class="accordion-collapse collapse show"
+                                            data-bs-parent="#accordionExample{{$index}}">
+                                            <div class="accordion-body">
+                                                {{$data->jawaban}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card accordion-item">
-                                <h2 class="accordion-header" id="headingTwo">
-                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                                        data-bs-target="#accordionTwo" aria-expanded="false"
-                                        aria-controls="accordionTwo">
-                                        Accordion Item 2
-                                    </button>
-                                </h2>
-                                <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                    data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear claw
-                                        dragée oat
-                                        cake dragée ice
-                                        cream halvah tootsie roll. Danish cake oat cake pie macaroon tart donut gummies.
-                                        Jelly
-                                        beans candy canes
-                                        carrot cake. Fruitcake chocolate chupa chups.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card accordion-item">
-                                <h2 class="accordion-header" id="headingThree">
-                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                                        data-bs-target="#accordionThree" aria-expanded="false"
-                                        aria-controls="accordionThree">
-                                        Accordion Item 3
-                                    </button>
-                                </h2>
-                                <div id="accordionThree" class="accordion-collapse collapse"
-                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        Oat cake toffee chocolate bar jujubes. Marshmallow brownie lemon drops
-                                        cheesecake.
-                                        Bonbon gingerbread
-                                        marshmallow sweet jelly beans muffin. Sweet roll bear claw candy canes oat cake
-                                        dragée
-                                        caramels. Ice cream
-                                        wafer danish cookie caramels muffin.
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--/ Accordion -->
 
+                <!-- Script untuk fungsi hapusData -->
+                <script>
+                    function hapusData(index) {
+                        // Implementasi logika penghapusan data di sini
+                        // Anda dapat menggunakan JavaScript atau Ajax untuk mengirim permintaan penghapusan ke server
+                        console.log('Menghapus data dengan index:', index);
+                    }
+                </script>
+                <script>
+                    // Fungsi untuk menetapkan nilai pertanyaan dan ID ke dalam modal saat tombol "Jawab" diklik
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var jawabLinks = document.querySelectorAll('.jawab-link');
 
+                        jawabLinks.forEach(function (link) {
+                            link.addEventListener('click', function (event) {
+                                var idPertanyaan = link.getAttribute('data-id');
+                                var pertanyaanText = link.getAttribute('data-pertanyaan');
+                                document.getElementById('idPertanyaan').value = idPertanyaan;
+                                document.getElementById('questionContainer').innerText = pertanyaanText;
+                            });
+                        });
+                    });
 
+                    // Fungsi untuk menyimpan jawaban (Anda dapat menyesuaikannya sesuai kebutuhan)
+                    function saveChanges() {
+                        // Lakukan logika penyimpanan jawaban di sini, bisa menggunakan AJAX atau form submit.
+                        document.getElementById('simpanJawaban').submit();
+                    }
+                </script>
                 @endsection
